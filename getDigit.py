@@ -16,11 +16,11 @@ dump_file_address = "/Users/tunahansalih/Work/DigitRecognition/model.joblib.pkl"
 
 model = joblib.load(dump_file_address)
 
-im = imread("/Users/tunahansalih/Desktop/Dataset/test9.jpg","L")
+im = imread("/Users/tunahansalih/Desktop/Dataset/test10.jpg","L")
 im = imresize(im,(28,28))
-imArr, im_hog= hog(im,orientations = 9, pixels_per_cell=(2,2), cells_per_block=(1,1), visualise=True)
+imArr, im_hog= hog(im,orientations = 9, pixels_per_cell=(3,3), cells_per_block=(1,1), visualise=True)
 plt.figure()
 plt.imshow(im)
 plt.figure()
 plt.imshow(im_hog)
-model.predict(imArr.reshape(1,-1))
+#print(model.predict(imArr.reshape(1,-1)))

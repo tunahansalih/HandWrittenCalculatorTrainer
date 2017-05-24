@@ -7,20 +7,16 @@ Created on Fri May 19 00:12:41 2017
 """
 
 import glob
-import matplotlib.pyplot as plt
 from scipy.misc import imread, imresize
 from sklearn.model_selection import train_test_split
 from skimage.feature import hog
 from sklearn.svm import LinearSVC
-import numpy as np
 from sklearn.externals import joblib
 
 
 #Data classes
 image_dataset_file = "/Users/tunahansalih/Desktop/extracted_images"
 character_classes = ['-',
-                     '(',
-                     ')',
                      '+',
                      '0',
                      '1',
@@ -42,7 +38,12 @@ features = []
 
 #Read Images
 for char_class in character_classes:
+    i = 0
     for filename in glob.glob(image_dataset_file + "/" + char_class + "/*.jpg" ):
+        i = i + 1
+        print(str(i))
+        if i > 3000:
+            break
         im = imread(filename, "L")
         im = imresize(im,(28,28))
         classes.append(char_class)
@@ -59,7 +60,7 @@ for feature in features:
 
 
 #Create test and train data
-features_hog_train, features_hog_test, classes_train, classes_test = train_test_split(features_hog, classes, test_size=0.33, random_state= 42)
+features_hog_train, features_hog_test, classes_train, classes_test = train_test_split(features_hog, classes, test_size=0.33, random_state= 42,stratify=classes)
 
 
 #Multivariate SVN
